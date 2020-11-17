@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>飘动的旗帜~</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        html, body {
+            height: 100%;
+            width: 100%;
+            background-color: lightgrey;
+        }
+
+        body {
+            text-align: center;
+            position: relative;
+        }
+
+        ul, li {
+            list-style: none;
+        }
+
+        #flag {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+        }
+        
+        /* 这里是核心css样式 */
+        #flag > li {
+            height: 100%;
+            float: left;
+            background-image: url(".flag.jpg");
+            background-size: auto 100%;
+            animation: flag ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+<ul id="flag"></ul>
+<script>
+  (function () {
+    // 这里是js代码
+  })();
+</script>
+</body>
+</html>
