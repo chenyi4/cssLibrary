@@ -1,0 +1,60 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #obj{
+        width: 130px;
+        height: 65px;
+        background-color: #759bff;
+        position: relative;
+        outline: 90px solid transparent !important;
+        border-radius: 45px;
+        left: 200px;
+        /* transition: b5ckground 0.1s ease-out; */
+    }
+</style>
+<body>
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="svg-filters">
+        <defs>
+            <filter id="filter-music">
+                <feTurbulence type="fractalNoise" baseFrequency="0.000001" numOctaves="1" result="warp" />
+                <feOffset dx="0" dy="-90" result="warpOffset" />
+                <feDisplacementMap xChannelSelector="R" yChannelSelector="G" scale="30" in="SourceGraphic" in2="warpOffset" />
+            </filter>
+        </defs>
+    </svg>
+    <div id="obj"></div>
+</body>
+<script src="./TweenMax.min.js"></script>
+<script>
+    var turb = document.querySelectorAll('#filter-music feTurbulence')[0];
+    var buttom = document.getElementById('obj');
+    var turbVal = { val: 0.000001 };
+  var turbValX = { val: 0.000001 };
+    var tl = new TimelineLite({
+        paused: true,
+        onComplete: function(){
+            tl.reverse();
+        },
+        onReverseComplete: function(){
+            // tl.restart();
+        },
+        onUpdate: function(){
+            turb.setAttribute('baseFrequency', turbVal.val + ' ' + turbValX.val);
+        }
+    });
+    tl.to(turbValX, 0.4, { val: 0.04, ease: Power0.easeNone}, 0);
+    tl.to(turbVal, 0.1, { val: 0.2 ,ease: Power0.easeNone }, 0);
+
+    buttom.onclick = function(){
+        buttom.style.filter = 'url(#filter-music)';
+        tl.play();
+    }
+
+    // tl.restart();
+    // tl.reverse();
+</script>
+</html>
