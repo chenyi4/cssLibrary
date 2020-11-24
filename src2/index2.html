@@ -1,0 +1,194 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #obj{
+        width: 125px;
+        height: 125px;
+        background: none;
+        color: white;
+        /* background-color: #759bff; */
+        /* background-color: black; */
+        /* background-color: rgba(0,0,0,2); */
+        position: relative;
+        border: none;
+        outline: 90px solid transparent !important;
+        /* border-radius: 145px; */
+        cursor: pointer;
+    }
+    .button--1 .circle {
+        position: absolute;
+        width: 25px;
+        height: 25px;
+        border-radius: 15px;
+        background: #222;
+        -webkit-transition: background-color 0.1s ease-out;
+        -moz-transition: background-color 0.1s ease-out;
+        transition: background-color 0.1s ease-out; 
+    }
+    .button--1 .circle.top-left {
+      top: 40%;
+      left: 27%; 
+    }
+    .button--1 .circle.bottom-right {
+      bottom: 40%;
+      right: 27%; 
+    }
+    
+.button--1 .button__bg{
+  -webkit-font-smoothing: antialiased;
+  background-color: black;
+  border: none;
+  display: inline-block;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.85em;
+  font-weight: 700;
+  text-decoration: none;
+  user-select: none;
+  letter-spacing: 0.1em;
+  color: white;
+  padding: 20px 40px;
+  text-transform: uppercase;
+  -webkit-transition: background-color 0.1s ease-out;
+  -moz-transition: background-color 0.1s ease-out;
+  transition: background-color 0.1s ease-out; 
+  transition: all ease 0.4s;
+}
+.button--1 .button__container {
+    position: absolute;
+    display: block;
+    width: 200%;
+    height: 400%;
+    top: -150%;
+    left: -50%;
+    pointer-events: none;
+    z-index: -1;
+    -webkit-transform: translateZ(0);      
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-transition: all 0.1s ease-out;
+    -moz-transition: all 0.1s ease-out;
+    transition: all 0.1s ease-out; }
+
+    .button--1 .button__bg {
+        position: absolute;
+        width: 20%;
+        height: 15%;
+        z-index: 10;
+        top: 50%;
+        left: 25%;
+        -webkit-transform: translateY(-50%);
+        -moz-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        -o-transform: translateY(-50%);
+        transform: translateY(-50%); 
+    }
+
+    #obj:hover .button__bg,#obj:hover .circle{
+        background-color: aqua;
+        animation: color-change 15s infinite;
+    }
+    @keyframes color-change {
+        0%{
+            background-color: brown;
+        }
+        50%{
+            background-color: cornflowerblue;
+        }
+        100%{
+            background-color: chartreuse;
+        }
+    }
+</style>
+<body>
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="svg-filters">
+        <defs>
+            <filter id="filter-goo-1">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="7" result="blur" />
+                <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
+                <feComposite in="SourceGraphic" in2="goo" />
+            </filter>
+        </defs>
+    </svg>
+    <button id="obj" class="button button--1">
+        Click me
+        <span class="button__container">
+            <span class="circle top-left"></span>
+            <span class="circle top-left"></span>
+            <span class="circle top-left"></span>
+            <span class="button__bg"></span>
+            <span class="circle bottom-right"></span>
+            <span class="circle bottom-right"></span>
+            <span class="circle bottom-right"></span>
+        </span>
+    </button>
+</body>
+<script src="./TweenMax.min.js"></script>
+<script>
+    var bt1 = document.querySelectorAll('#obj')[0];
+    var bt1c = document.querySelector('.button__container');
+    var $circlesTopLeft = bt1.querySelectorAll('.circle.top-left');
+    var $circlesBottomRight = bt1.querySelectorAll('.circle.bottom-right');
+    var filter = document.querySelectorAll('#filter-goo-1 feGaussianBlur')[0];
+
+    var btTl = new TimelineLite({ 
+        paused: true, 
+        onUpdate: function() {
+            filter.setAttribute('x', 0);
+        },
+        onComplete: function() {
+            bt1c.style.filter = 'none';
+        } 
+    });
+
+    var tl = new TimelineLite();
+    var tl2 = new TimelineLite();
+
+    tl.to($circlesTopLeft, 1.2, { x: -25, y: -25, scaleY: 2, ease: SlowMo.ease.config(0.1, 0.7, false) });
+    tl.to($circlesTopLeft[0], 0.1, { scale: 0.2, x: '+=6', y: '-=2' });
+    tl.to($circlesTopLeft[1], 0.1, { scaleX: 1, scaleY: 0.8, x: '-=10', y: '-=7' }, '-=0.1');
+    tl.to($circlesTopLeft[2], 0.1, { scale: 0.2, x: '-=15', y: '+=6' }, '-=0.1');
+    tl.to($circlesTopLeft[0], 1, { scale: 0, x: '-=5', y: '-=15', opacity: 0 });
+    tl.to($circlesTopLeft[1], 1, { scaleX: 0.4, scaleY: 0.4, x: '-=10', y: '-=10', opacity: 0 }, '-=1');
+    tl.to($circlesTopLeft[2], 1, { scale: 0, x: '-=15', y: '+=5', opacity: 0 }, '-=1');
+
+    tl2.to($circlesBottomRight, 1.2, { x: 25, y: 25, scaleY: 2, ease: SlowMo.ease.config(0.1, 0.7, false) });
+    tl2.to($circlesBottomRight[0], 0.1, { scale: 0.2, x: '-=6', y: '+=3' });
+    tl2.to($circlesBottomRight[1], 0.1, { scale: 0.8, x: '+=7', y: '+=3' }, '-=0.1');
+    tl2.to($circlesBottomRight[2], 0.1, { scale: 0.2, x: '+=15', y: '-=6' }, '-=0.1');
+    tl2.to($circlesBottomRight[0], 1, { scale: 0, x: '+=5', y: '+=15', opacity: 0 });
+    tl2.to($circlesBottomRight[1], 1, { scale: 0.4, x: '+=7', y: '+=7', opacity: 0 }, '-=1');
+    tl2.to($circlesBottomRight[2], 1, { scale: 0, x: '+=15', y: '-=5', opacity: 0 }, '-=1');
+
+    var tlBt1 = new TimelineLite();
+    var tlBt2 = new TimelineLite();
+
+    tlBt1.set($circlesTopLeft, { x: 0, y: 0, rotation: -45 });
+    tlBt1.add(tl); //把tl的动画效果控制权赋予 tlBt1 按钮
+
+    tlBt2.set($circlesBottomRight, { x: 0, y: 0, rotation: -45 });
+    tlBt2.add(tl2); //把tl的动画效果控制权赋予 tlBt2 按钮
+
+    btTl.add(tlBt1);
+    console.log(bt1.parentNode.querySelectorAll('.button__bg'));
+    btTl.to(bt1.parentNode.querySelectorAll('.button__bg'), 0.8, { scaleY: 1.1 }, 0.1);
+    btTl.add(tlBt2, 0.2); //add 0.2是什么?
+    btTl.to(bt1.parentNode.querySelectorAll('.button__bg'), 1.8, { scale: 1, ease: Elastic.easeOut.config(1.2, 0.4) }, 1.2);
+    
+    btTl.timeScale(2.6);  //timeScale待测
+
+    bt1.addEventListener('click', function() {
+        bt1c.style.filter = 'url(#filter-goo-1)';
+        btTl.restart();
+    });
+
+
+             
+
+</script>
+</html>

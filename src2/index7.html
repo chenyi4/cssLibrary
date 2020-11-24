@@ -1,0 +1,71 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+.button--7{
+    -webkit-font-smoothing: antialiased;
+    background-color: #222;
+    border: none;
+    display: inline-block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.85em;
+    font-weight: 700;
+    text-decoration: none;
+    user-select: none;
+    letter-spacing: 0.1em;
+    color: white;
+    padding: 20px 40px;
+    text-transform: uppercase;
+    -webkit-transition: background-color 0.1s ease-out;
+    -moz-transition: background-color 0.1s ease-out;
+    transition: background-color 0.1s ease-out;
+}
+.button--7:hover{
+    background-color: #2CD892;
+}
+.button--7 {
+  transform: translateZ(0);
+  outline: 90px solid transparent !important; }
+</style>
+<body>
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="svg-filters">
+        <defs>
+            <filter id="filter-glitch-3">
+                <feTurbulence type="fractalNoise" baseFrequency="0.000001" numOctaves="1" result="warp" />
+                <feOffset dx="-90" dy="-90" result="warpOffset" />
+                <feDisplacementMap xChannelSelector="R" yChannelSelector="G" scale="30" in="SourceGraphic" in2="warpOffset" />
+            </filter>
+        </defs>
+    </svg>
+    <button id="component-7" class="button button--7">Click me</button>
+</body>
+<script src="./TweenMax.min.js"></script>
+<script>
+        function initBt7(){
+            var bt = document.querySelectorAll('#component-7')[0];
+            var turbVal = { val: 0.000001 };
+            var turb = document.querySelectorAll('#filter-glitch-3 feTurbulence')[0];
+            var btTl = new TimelineLite({ paused: true, onUpdate: function() {
+                turb.setAttribute('baseFrequency', '0.00001 ' + turbVal.val); // Firefox bug is value is 0
+            },
+            onStart: function() {
+                bt.style.filter = 'url(#filter-glitch-3)';
+            },
+            onComplete: function() {
+                bt.style.filter = 'none';
+            }});
+
+            btTl.to(turbVal, 0.4, { val: 0.4 });
+            btTl.to(turbVal, 0.2, { val: 0.000001 });
+
+            bt.addEventListener('click', function() {
+                btTl.restart();
+            });
+        }
+
+        initBt7();
+</script>
+</html>

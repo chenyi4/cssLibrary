@@ -1,0 +1,155 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .button--4 .button__bg{
+        -webkit-font-smoothing: antialiased;
+        background-color: #222;
+        border: none;
+        display: inline-block;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.85em;
+        font-weight: 700;
+        text-decoration: none;
+        user-select: none;
+        letter-spacing: 0.1em;
+        color: white;
+        padding: 20px 40px;
+        text-transform: uppercase;
+        -webkit-transition: background-color 0.1s ease-out;
+        -moz-transition: background-color 0.1s ease-out;
+        transition: background-color 0.1s ease-out; 
+    }
+    .button--4 {
+        position: relative;
+        z-index: 1;
+        width: 80px;
+        height: 80px;
+        line-height: 80px;
+        padding: 0;
+        background: none;
+        border: none;
+        color: white;
+        cursor: pointer;
+    }
+   .button--4:hover {
+        background: none;   
+   }
+   .button--4:focus {
+        outline: none;
+   }
+  .button--4:active .button__bg {
+       transform: scale(0.8); 
+   }
+  .button--4 .button__bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        outline: 90px solid transparent !important;
+        padding: 0;
+        border-radius: 100px;
+        -webkit-transform: translateZ(0);
+        -moz-transform: translateZ(0);
+        -ms-transform: translateZ(0);
+        -o-transform: translateZ(0);
+        transform: translateZ(0);
+        background: none;
+        font-weight: bold;
+        z-index: -2;
+        -webkit-transition: all 0.1s ease-out;
+        -moz-transition: all 0.1s ease-out;
+        transition: all 0.1s ease-out; 
+    }
+   .button--4 .button__bg:hover {
+      background: none; 
+    }
+   .button--4 .blob {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        width: 100%;
+        height: 100%;
+        border-radius: 70px;
+        opacity: 0.3;
+        background: #222;
+        -webkit-transition: background 0.1s ease-out;
+        -moz-transition: background 0.1s ease-out;
+        transition: background 0.1s ease-out;
+        z-index: -1;
+        pointer-events: none; 
+    }
+    .button--4 .blob:first-child {
+      opacity: 1; 
+    }
+    .button--4 .blob:nth-child(n+2) {
+        width: 100%;
+        height: 100%;
+    }
+</style>
+<body>
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="svg-filters">
+        <defs>
+            <filter id="filter-goo-4">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="7" result="blur" />
+                <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
+            </filter>
+        </defs>
+    </svg>
+    <button id="component-4" class="button button--4">
+        click
+        <span class="button__bg" style="filter: url('#filter-goo-4')">
+            <span class="blob"></span>
+            <span class="blob"></span>
+            <span class="blob"></span>
+            <span class="blob"></span>
+        </span>
+    </button>
+</body>
+<script src="./TweenMax.min.js"></script>
+<script>
+    var bt = document.querySelectorAll('#component-4')[0];
+    var bg = document.querySelectorAll('#component-4 .button')[0];
+    var blob = document.querySelectorAll('#component-4 .blob');
+    var filter = document.querySelector('#filter-goo-4 feGaussianBlur');
+
+    function getRandom(min, max){
+      return Math.random() * (max - min) + min;
+    }
+
+    bt.addEventListener('mousemove', function(e) {
+        
+        var x = (e.pageX - bt.offsetLeft - bt.offsetWidth / 2) * 0.6;
+        var y = (e.pageY - bt.offsetTop - bt.offsetHeight / 2) * 0.6;
+
+        TweenLite.to(blob[1], 4.2, { x: x, y: y, ease: Elastic.easeOut.config(1, 0.1) });
+        TweenLite.to(blob[2], 2.8, { x: x, y: -y, ease: Elastic.easeOut.config(1, 0.1) });
+        TweenLite.to(blob[3], 2.8, { x: -x, y: -y, ease: Elastic.easeOut.config(1, 0.1) });
+        TweenLite.to(filter, 5, { onUpdate: function() { filter.setAttribute('x', 0); }});
+        
+    });
+
+    bt.addEventListener('mouseup', function(e) {
+        var x = e.pageX - bt.offsetLeft - blob[0].offsetWidth / 2;
+        var y = e.pageY - bt.offsetTop - blob[0].offsetHeight / 2;
+
+        var dirX = Math.random() > 0.5 ? -1 : 1;
+        var dirY = Math.random() > 0.5 ? -1 : 1;
+        var r = getRandom(60, 80);
+            
+        Array.prototype.slice.call(blob, 1).forEach(function(bt) {
+            var tl = new TimelineLite();
+            tl.to(bt, 1.2, { x: dirX * r * Math.random() + '%', y: dirY * r * Math.random() + '%', ease: Elastic.easeOut.config(1, 0.2) });
+            tl.to(bt, 1.2, { x: '0%', y: '0%', ease: Elastic.easeOut.config(1, 0.2) }, '-=1.1');
+        });
+    });
+             
+</script>
+</html>

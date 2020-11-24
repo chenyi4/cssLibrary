@@ -80,7 +80,7 @@ function initBt1() {
   btTl.to(bt1.parentNode.querySelectorAll('.button__bg'), 1.8, { scale: 1, ease: Elastic.easeOut.config(1.2, 0.4) }, 1.2);
 
   btTl.timeScale(2.6);
-
+  
   bt1.addEventListener('click', function() {
     bt1c.style.filter = 'url(#filter-goo-1)';
     btTl.restart();

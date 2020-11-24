@@ -7,44 +7,53 @@
 .clearfix:before,
 .clearfix:after {
   content: '';
-  display: table; }
+  display: table; 
+}
 
 .clearfix:after {
-  clear: both; }
+  clear: both; 
+}
 
 body {
   font-family: Avenir, 'Helvetica Neue', 'Lato', 'Segoe UI', Helvetica, Arial, sans-serif;
   color: #222;
   background: #f6f6f6;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale; }
+  -moz-osx-font-smoothing: grayscale; 
+}
 
 a {
   text-decoration: none;
   color: #aaa;
-  outline: none; }
+  outline: none; 
+}
 
 a:hover,
 a:focus {
-  color: #333; }
+  color: #333; 
+}
 
 .container {
   position: relative;
-  overflow: hidden; }
+  overflow: hidden; 
+}
 
 .hidden {
   position: absolute;
   overflow: hidden;
   width: 0;
   height: 0;
-  pointer-events: none; }
+  pointer-events: none;
+}
 
 .github-corner {
-  cursor: pointer; }
+  cursor: pointer;
+}
 
 .github-corner:hover .octo-arm {
   -webkit-animation: octocat-wave 560ms ease-in-out;
-  animation: octocat-wave 560ms ease-in-out; }
+  animation: octocat-wave 560ms ease-in-out; 
+}
 
 @-webkit-keyframes octocat-wave {
   0%,
@@ -79,7 +88,8 @@ a:focus {
 
   .github-corner .octo-arm {
     -webkit-animation: octocat-wave 560ms ease-in-out;
-    animation: octocat-wave 560ms ease-in-out; } }
+    animation: octocat-wave 560ms ease-in-out; }
+}
 /* Header */
 .codrops-header {
   padding: 2em 10vw 8em; }
