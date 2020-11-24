@@ -45,7 +45,7 @@
             turb.setAttribute('baseFrequency', turbVal.val + ' ' + turbValX.val);
         }
     });
-    
+
     tl.to(turbValX, 0.4, { val: 0.04, ease: Power0.easeNone}, 0);
     tl.to(turbVal, 0.1, { val: 0.2 , ease: Power0.easeNone }, 0);
 
@@ -53,7 +53,7 @@
         buttom.style.filter = 'url(#filter-music)';
         tl.play();
     }
-
+    
     // tl.restart();
     // tl.reverse();
 </script>
