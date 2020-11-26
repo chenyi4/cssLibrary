@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<title>公交车</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div class="stage">
+		<div class="warp">
+			<div class="box">
+				<div class="face top"></div>
+				<div class="face bottom">
+				</div>
+				<div class="face front">
+					<div class="window">
+						<div class="glass"></div>
+					</div>
+				</div>
+				<div class="face back">         
+					<div class="window">
+						<div class="glass"></div>
+					</div>
+				</div>
+				<div class="face left">
+					<div class="wheel">
+						<div class="wheel-front">
+						</div>
+						<div class="wheel-back">
+						</div>
+					</div>
+				</div>
+				<div class="face right">
+					<div class="wheel">
+						<div class="wheel-front">
+						</div>
+						<div class="wheel-back">
+						</div>
+					</div>
+				</div>
+				<div class="wheel-width left-front"></div>
+				<div class="wheel-width left-back"></div>
+				<div class="wheel-width right-front"></div>
+				<div class="wheel-width right-back"></div>
+				<div class="wheel-in left-front-in"></div>
+				<div class="wheel-in left-back-in"></div>
+				<div class="wheel-in right-front-in"></div>
+				<div class="wheel-in right-back-in"></div>
+			</div>
+		</div>
+	</div>
+	<script>
+		/*
+		var bus=document.querySelector('.box');
+		// console.log(buss.style.transform)
+		var backing=null;
+		window.onkeydown=function(e) {
+			if (e.keyCode===37) {
+				bus.style.transform='rotateY(190deg)';
+				clearTimeout(backing);
+				backing=setTimeout(function(){
+					bus.style.transform='rotateY(180deg)';
+				},1000);
+			}else if (e.keyCode===39) {
+				bus.style.transform='rotateY(170deg)';
+				clearTimeout(backing);
+				backing=setTimeout(function(){
+					bus.style.transform='rotateY(180deg)';
+				},1000);
+			}
+			
+		}
+		
+		function styleParse(style_str) {
+			if (style_str&&style_str!='') {
+				return style_str.match(/\d{1,3}/g)[0];
+			}else{
+				return 0;
+			}
+			
+		}
+		var mx=0,my=0,click=false;
+		var deg=styleParse(bus.style.transform);
+		window.onmousedown=function(e){
+			e.preventDefault();
+			click=true;
+			mx=e.pageX;
+			my=e.pageY;
+		}
+		window.onmouseup=function(e){
+			click=false;
+		}
+		window.onmousemove=function(e){
+			// console.log(click)
+			if (click) {
+				if (e.pageX>mx) {
+					deg++;
+				}else if (e.pageX<mx){
+					deg--;
+				}
+				bus.style.transform='rotateY('+deg+'deg)';
+				// console.log(1)
+			}
+
+		}
+		*/
+	</script>
+</body>
+</html>
