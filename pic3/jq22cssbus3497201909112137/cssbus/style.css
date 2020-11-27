@@ -123,6 +123,7 @@
 	position: absolute;
 	/*background-image: url(wheel.png);*/
 }
+
 .left-front-in{
 	transform: translateY(140px) translateX(180px) translateZ(150px) rotateY(90deg);
 }
